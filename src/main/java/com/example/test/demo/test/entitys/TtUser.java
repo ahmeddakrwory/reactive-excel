@@ -2,10 +2,11 @@ package com.example.test.demo.test.entitys;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-
+@Immutable
 @Table(name = "tt_user")
 public class TtUser {
     @Id

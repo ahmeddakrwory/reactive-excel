@@ -1,5 +1,7 @@
 package com.example.test.demo.test;
 
+import com.example.test.demo.test.entitys.CancellationDetail;
+import com.example.test.demo.test.entitys.TtOrganization;
 import com.example.test.demo.test.entitys.TtUser;
 
 //import javax.annotation.Resource;
@@ -19,14 +21,13 @@ import com.example.test.demo.test.entitys.TtUser;
 //import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.bind.annotation.RestController;
 //import reactor.core.publisher.Mono;
+import com.example.test.demo.test.repos.CancellationDetailRepo;
+import com.example.test.demo.test.repos.OrgannizationRepo;
 import com.example.test.demo.test.repos.UserRepo;
-import com.example.test.demo.test.utils.*;
-import com.google.common.io.Files;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,11 +50,18 @@ public class TestController {
     private static List<TtUser> users;
     @Autowired
     private UserRepo repo;
+    @Autowired
+    private OrgannizationRepo organnizationRepo;
+    @Autowired
+    private Services services;
+    @Autowired
+    private CancellationDetailRepo cancellationDetailRepo;
     @GetMapping( value = "/getAllusers", produces = {"application/stream+json"})
     public Disposable prepare() {
         Flux<TtUser> all=repo.findAll();
         users=new ArrayList<TtUser>();
         return  all.subscribe(valus->{
+
             System.out.println("AAA" + valus.getFirstName());
             users.add(valus);});
         }
@@ -76,7 +83,18 @@ public class TestController {
                         }));
     }
     public List<TtUser> data(){return users;}
-
-    }
+@GetMapping(value="/hql",produces = {"application/stream+json"})
+public Flux<TtUser> gethql(){
+        return services.hal();
+}
+    @GetMapping( value = "/getOrgs", produces = {"application/stream+json"})
+public  Flux<TtOrganization>getAllprgs(){
+        return  organnizationRepo.findAll();
+}
+@GetMapping("/empd")
+    public Flux<CancellationDetail> getCancellationDetailId(){
+        return  cancellationDetailRepo.findAll();
+}
+}
 
 
