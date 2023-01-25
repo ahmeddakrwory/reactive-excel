@@ -1,100 +1,103 @@
 package com.example.test.demo.test.entitys;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Immutable;
-import org.springframework.data.relational.core.mapping.Column;
+
 import org.springframework.data.relational.core.mapping.Table;
 
-@Immutable
-@Table(name = "tt_user")
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.time.Instant;
+
+
+@Table( "tt_user")
 public class TtUser {
     @Id
-    @Column( "USER_ID")
-    private Integer userId;
 
-    @Column( "USER_ALIAS")
+    @Column( name="USER_ID")
+    private Integer id;
+
+    @Column( name = "USER_ALIAS")
     private String userAlias;
 
-    @Column( "PASSWORD")
+    @Column( name = "PASSWORD")
     private String password;
 
-    @Column(  "TITLE")
+    @Column( name = "TITLE")
     private Integer title;
 
-    @Column( "FIRST_NAME")
+    @Column( name = "FIRST_NAME")
     private String firstName;
 
-    @Column( "MIDDLE_NAME")
+    @Column( name = "MIDDLE_NAME")
     private String middleName;
 
-    @Column( "LAST_NAME")
+    @Column( name = "LAST_NAME")
     private String lastName;
 
-    @Column( "MOBILE_NUMBER")
+    @Column( name = "MOBILE_NUMBER")
     private String mobileNumber;
 
-    @Column( "DATE_OF_BIRTH")
-    private java.sql.Timestamp dateOfBirth;
+    @Column( name = "DATE_OF_BIRTH")
+    private Instant dateOfBirth;
 
-    @Column( "PROFILE_IMAGE")
+    @Column( name = "PROFILE_IMAGE")
     private String profileImage;
 
-    @Column( "EMAIL")
+    @Column( name = "EMAIL")
     private String email;
 
-    @Column( "FAX")
+    @Column(name = "FAX")
     private String fax;
 
-    @Column( "GENDER")
+    @Column( name = "GENDER")
     private Integer gender;
 
-    @Column( "MARITAL_STATUS")
+    @Column(name = "MARITAL_STATUS")
     private Integer maritalStatus;
 
-    @Column( "USER_TYPE")
+    @Column(name = "USER_TYPE")
     private Integer userType;
 
-    @Column( "LAST_LOGIN_DATE")
-    private java.sql.Timestamp lastLoginDate;
+    @Column( name = "LAST_LOGIN_DATE")
+    private Instant lastLoginDate;
 
-    @Column( "CREATION_TIME")
-    private java.sql.Timestamp creationTime;
+    @Column( name = "CREATION_TIME")
+    private Instant creationTime;
 
-    @Column( "LAST_MOD_TIME")
-    private java.sql.Timestamp lastModTime;
+    @Column( name = "LAST_MOD_TIME")
+    private Instant lastModTime;
 
-    @Column( "USER_STATUS")
+    @Column( name = "USER_STATUS")
     private Integer userStatus;
 
-    @Column( "DISABLE_SIGNIN")
+    @Column( name = "DISABLE_SIGNIN")
     private Integer disableSignin;
 
-    @Column( "MOBILE_NUMBER1")
+    @Column( name = "MOBILE_NUMBER1")
     private String mobileNumber1;
 
-    @Column("APPROVAL_ID")
+    @Column( name = "APPROVAL_ID")
     private Integer approvalId;
 
-    @Column("IMPORT_PNR")
+    @Column( name = "IMPORT_PNR")
     private Integer importPnr;
 
-    @Column( "USER_SCOPE_TYPE")
+    @Column( name = "USER_SCOPE_TYPE")
     private Integer userScopeType;
 
-    @Column( "LAST_MODIFIED_PASS_TIME")
-    private java.sql.Timestamp lastModifiedPassTime;
+    @Column( name = "LAST_MODIFIED_PASS_TIME")
+    private Instant lastModifiedPassTime;
 
-    public Integer getUserId() {
-        return this.userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserAlias() {
-        return this.userAlias;
+        return userAlias;
     }
 
     public void setUserAlias(String userAlias) {
@@ -102,7 +105,7 @@ public class TtUser {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
@@ -110,7 +113,7 @@ public class TtUser {
     }
 
     public Integer getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(Integer title) {
@@ -118,7 +121,7 @@ public class TtUser {
     }
 
     public String getFirstName() {
-        return this.firstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -126,7 +129,7 @@ public class TtUser {
     }
 
     public String getMiddleName() {
-        return this.middleName;
+        return middleName;
     }
 
     public void setMiddleName(String middleName) {
@@ -134,7 +137,7 @@ public class TtUser {
     }
 
     public String getLastName() {
-        return this.lastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
@@ -142,23 +145,23 @@ public class TtUser {
     }
 
     public String getMobileNumber() {
-        return this.mobileNumber;
+        return mobileNumber;
     }
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
-    public java.sql.Timestamp getDateOfBirth() {
-        return this.dateOfBirth;
+    public Instant getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateOfBirth(java.sql.Timestamp dateOfBirth) {
+    public void setDateOfBirth(Instant dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     public String getProfileImage() {
-        return this.profileImage;
+        return profileImage;
     }
 
     public void setProfileImage(String profileImage) {
@@ -166,7 +169,7 @@ public class TtUser {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -174,7 +177,7 @@ public class TtUser {
     }
 
     public String getFax() {
-        return this.fax;
+        return fax;
     }
 
     public void setFax(String fax) {
@@ -182,7 +185,7 @@ public class TtUser {
     }
 
     public Integer getGender() {
-        return this.gender;
+        return gender;
     }
 
     public void setGender(Integer gender) {
@@ -190,7 +193,7 @@ public class TtUser {
     }
 
     public Integer getMaritalStatus() {
-        return this.maritalStatus;
+        return maritalStatus;
     }
 
     public void setMaritalStatus(Integer maritalStatus) {
@@ -198,39 +201,39 @@ public class TtUser {
     }
 
     public Integer getUserType() {
-        return this.userType;
+        return userType;
     }
 
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
-    public java.sql.Timestamp getLastLoginDate() {
-        return this.lastLoginDate;
+    public Instant getLastLoginDate() {
+        return lastLoginDate;
     }
 
-    public void setLastLoginDate(java.sql.Timestamp lastLoginDate) {
+    public void setLastLoginDate(Instant lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public java.sql.Timestamp getCreationTime() {
-        return this.creationTime;
+    public Instant getCreationTime() {
+        return creationTime;
     }
 
-    public void setCreationTime(java.sql.Timestamp creationTime) {
+    public void setCreationTime(Instant creationTime) {
         this.creationTime = creationTime;
     }
 
-    public java.sql.Timestamp getLastModTime() {
-        return this.lastModTime;
+    public Instant getLastModTime() {
+        return lastModTime;
     }
 
-    public void setLastModTime(java.sql.Timestamp lastModTime) {
+    public void setLastModTime(Instant lastModTime) {
         this.lastModTime = lastModTime;
     }
 
     public Integer getUserStatus() {
-        return this.userStatus;
+        return userStatus;
     }
 
     public void setUserStatus(Integer userStatus) {
@@ -238,7 +241,7 @@ public class TtUser {
     }
 
     public Integer getDisableSignin() {
-        return this.disableSignin;
+        return disableSignin;
     }
 
     public void setDisableSignin(Integer disableSignin) {
@@ -246,7 +249,7 @@ public class TtUser {
     }
 
     public String getMobileNumber1() {
-        return this.mobileNumber1;
+        return mobileNumber1;
     }
 
     public void setMobileNumber1(String mobileNumber1) {
@@ -254,7 +257,7 @@ public class TtUser {
     }
 
     public Integer getApprovalId() {
-        return this.approvalId;
+        return approvalId;
     }
 
     public void setApprovalId(Integer approvalId) {
@@ -262,7 +265,7 @@ public class TtUser {
     }
 
     public Integer getImportPnr() {
-        return this.importPnr;
+        return importPnr;
     }
 
     public void setImportPnr(Integer importPnr) {
@@ -270,18 +273,19 @@ public class TtUser {
     }
 
     public Integer getUserScopeType() {
-        return this.userScopeType;
+        return userScopeType;
     }
 
     public void setUserScopeType(Integer userScopeType) {
         this.userScopeType = userScopeType;
     }
 
-    public java.sql.Timestamp getLastModifiedPassTime() {
-        return this.lastModifiedPassTime;
+    public Instant getLastModifiedPassTime() {
+        return lastModifiedPassTime;
     }
 
-    public void setLastModifiedPassTime(java.sql.Timestamp lastModifiedPassTime) {
+    public void setLastModifiedPassTime(Instant lastModifiedPassTime) {
         this.lastModifiedPassTime = lastModifiedPassTime;
     }
+
 }

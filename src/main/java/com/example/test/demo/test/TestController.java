@@ -2,7 +2,6 @@ package com.example.test.demo.test;
 
 import com.example.test.demo.test.entitys.CancellationDetail;
 import com.example.test.demo.test.entitys.TtOrganization;
-import com.example.test.demo.test.entitys.TtUser;
 
 //import javax.annotation.Resource;
 //import java.io.*;
@@ -21,6 +20,7 @@ import com.example.test.demo.test.entitys.TtUser;
 //import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.bind.annotation.RestController;
 //import reactor.core.publisher.Mono;
+import com.example.test.demo.test.entitys.TtUser;
 import com.example.test.demo.test.repos.CancellationDetailRepo;
 import com.example.test.demo.test.repos.OrgannizationRepo;
 import com.example.test.demo.test.repos.UserRepo;
@@ -62,7 +62,7 @@ public class TestController {
         users=new ArrayList<TtUser>();
         return  all.subscribe(valus->{
 
-            System.out.println("AAA" + valus.getFirstName());
+            System.out.println("AAA" + valus.getEmail());
             users.add(valus);});
         }
 
@@ -82,7 +82,7 @@ public class TestController {
                             return Mono.just(resource);
                         }));
     }
-    public List<TtUser> data(){return users;}
+   public List<TtUser> data(){return users;}
 @GetMapping(value="/hql",produces = {"application/stream+json"})
 public Flux<TtUser> gethql(){
         return services.hal();
@@ -95,6 +95,9 @@ public  Flux<TtOrganization>getAllprgs(){
     public Flux<CancellationDetail> getCancellationDetailId(){
         return  cancellationDetailRepo.findAll();
 }
+
+@GetMapping("/fu")
+    public  Flux<TtUser> ius(){ return  repo.findAll();}
 }
 
 
