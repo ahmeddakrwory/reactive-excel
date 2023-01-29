@@ -35,40 +35,7 @@ class CsvWriterService {
     public void setAll(List<TtUser> all) {
         this.all = all;
     }
-//    public Mono<ByteArrayInputStream> generateCsv(){
-//        String[] columns = {"name","id"};
-//        ArrayList<Muset> aaa=new ArrayList<>();
-//        aaa.add(new Muset("Ahmed",1));
-//        setAll(aaa);
-////        List<Region>all=regionRepository.findAll();
-//        return Mono.fromCallable(() -> {
-//            try {
-//                ByteArrayInOutStream stream = new ByteArrayInOutStream();
-//                OutputStreamWriter streamWriter = new OutputStreamWriter(stream);
-//                CSVWriter writer = new CSVWriter(streamWriter);
-//
-//                ColumnPositionMappingStrategy mappingStrategy = new ColumnPositionMappingStrategy();
-//                mappingStrategy.setType(Muset.class);
-//                mappingStrategy.setColumnMapping(columns);
-//                writer.writeNext(columns);
-//
-//                StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder(writer)
-//                        .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-//                        .withMappingStrategy(mappingStrategy)
-//                        .withSeparator(',')
-//                        .build();
-//
-//                beanToCsv.write(getAll());
-//                streamWriter.flush();
-//                return stream.getInputStream();
-//            }
-//            catch (CsvException | IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//        }).subscribeOn(Schedulers.boundedElastic());
-//
-//    }
+
 public Mono<ByteArrayInputStream> generateCsv(){
     String [] columns=new String[5] ;
     columns[0]=userId;

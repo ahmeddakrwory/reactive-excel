@@ -3,10 +3,16 @@ package com.example.test.demo.test;
 import com.example.test.demo.test.entitys.TtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.relational.core.query.Query;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
+
+import static org.springframework.data.domain.Sort.Order.by;
+import static org.springframework.data.domain.Sort.Order.desc;
+import static org.springframework.data.relational.core.query.Criteria.where;
+import static org.springframework.data.relational.core.query.Query.query;
 
 
 @Service
@@ -26,15 +32,17 @@ public class Services {
     return entityTemplate.select(TtUser.class)
             .all();
    }
-//   @Transactional
-//    public Flux<TtUser>getsql(){
-//
-//        entityTemplate.getDatabaseClient().sql("SELECT  * FROM  tt_user").map(row ->
-//                row.
-//
-//                )
-//   }
+   @Transactional
+    public Flux<TtUser>getsql() {
+//   String query="FROM TtUser";
+String selcet="1=1";
+       return
+       entityTemplate.select(query(where("userAlias").is("e.ramzy@ndceg.com")), TtUser.class);
 
 
 
+
+
+
+}
 }
