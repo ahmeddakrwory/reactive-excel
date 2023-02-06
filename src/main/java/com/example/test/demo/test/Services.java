@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
+import javax.persistence.StoredProcedureQuery;
+
 import static org.springframework.data.domain.Sort.Order.by;
 import static org.springframework.data.domain.Sort.Order.desc;
 import static org.springframework.data.relational.core.query.Criteria.where;
@@ -39,10 +41,9 @@ String selcet="1=1";
        return
        entityTemplate.select(query(where("userAlias").is("e.ramzy@ndceg.com")), TtUser.class);
 
-
-
-
-
-
 }
+//@Transactional
+//    public Flux<Object> getfinace (){
+//
+//}
 }
