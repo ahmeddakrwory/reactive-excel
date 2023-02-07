@@ -1,10 +1,10 @@
 package com.example.test.demo.test.entitys;
 
 import org.hibernate.annotations.Immutable;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
 
 import java.time.Instant;
 
@@ -15,34 +15,34 @@ import java.time.Instant;
 @Immutable
 @Table(name = "rv_pnrimport_history")
 public class RvPnrimportHistory {
-    @Column(name = "AGENTNAME", length = 100)
+    @Column( "AGENTNAME")
     private String agentname;
 
-    @Column(name = "ORGNAME", length = 100)
+    @Column( "ORGNAME")
     private String orgname;
 
-    @Column(name = "SUPPLIERNAME", length = 50)
+    @Column( "SUPPLIERNAME")
     private String suppliername;
 
-    @Column(name = "ID", nullable = false)
+    @Column( "ID")
     private Integer id;
 
-    @Column(name = "SP_PNR", nullable = false, length = 50)
+    @Column( "SP_PNR")
     private String spPnr;
 
-    @Column(name = "AGENCY_ID", nullable = false, length = 20)
+    @Column( "AGENCY_ID")
     private String agencyId;
 
-    @Column(name = "AGENT_ID")
+    @Column( "AGENT_ID")
     private Integer agentId;
 
-    @Column(name = "IMPORT_DATE_TIME", nullable = false)
+    @Column( "IMPORT_DATE_TIM")
     private Instant importDateTime;
 
-    @Column(name = "PCC_ID")
+    @Column( "PCC_ID")
     private Integer pccId;
 
-    @Column(name = "PNR_CREATED_BY_OFFICE_ID", length = 50)
+    @Column( "PNR_CREATED_BY_OFFICE_ID")
     private String pnrCreatedByOfficeId;
 
     public String getAgentname() {

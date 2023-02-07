@@ -1,5 +1,6 @@
 package com.example.test.demo.test;
 
+import com.example.test.demo.test.entitys.RvPnrimportHistory;
 import com.example.test.demo.test.entitys.TtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
@@ -46,4 +47,9 @@ String selcet="1=1";
 //    public Flux<Object> getfinace (){
 //
 //}
+    @Transactional
+    Flux<RvPnrimportHistory>getrv(String s){
+        return
+                entityTemplate.select(query(where("orgname").in(s)), RvPnrimportHistory.class);
+    }
 }

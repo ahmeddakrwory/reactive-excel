@@ -19,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.Disposable;
@@ -31,6 +32,7 @@ import java.nio.channels.FileLock;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -235,28 +237,34 @@ public class TestController {
         return null;
     }
     @PostMapping("/pnrstram")
-    @TransactionalEventListener
+
 public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch) throws IOException {
+        Date date1 = new Date();
         String generatedString = RandomStringUtils.randomAlphabetic(10);
         Flux<RvPnrimportHistory>all=null;
+//        Flux<RvPnrimportHistory>rvPnrimportHistoryFlux=services.getrv(reportSearch.getOrgname());
     File file = new File("D://"+generatedString+".csv");
         //Long count= rvPnrimportHistoryRepo.count();
-     Mono<Long>count =rvPnrimportHistoryRepo.count();
+//     Mono<Long>count =rvPnrimportHistoryRepo.count();
     CSVWriter writer1;
     FileWriter outputfile=new FileWriter(file);
     try {
 
         writer1 = new CSVWriter(outputfile);
-        String[] header = {"spnr", "orgname"};
+        String[] header = {"spnr", "orgname","suppliername"};
 
 
         writer1.writeNext(header);
-
-  all= (Flux<RvPnrimportHistory>) rvPnrimportHistoryRepo.findAll().doOnNext(s->{
+//        services.getrv(reportSearch.getOrgname()
+        rvPnrimportHistoryRepo.findAll().doOnNext(s->{
               System.out.println(s.getAgentname());
           }).doOnComplete(() -> {
               try {
                   writer1.close();
+                  Date date2 = new  Date();
+                  long diffInMillies = date2.getTime() - date1.getTime();
+                  System.out.println(diffInMillies);
+
               } catch (IOException e) {
                   throw new RuntimeException(e);
               }
@@ -265,6 +273,7 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
 
                     header[0]=rvPnrimportHistory.getAgentname();
                     header[1]=rvPnrimportHistory.getOrgname();
+                    header[2]=rvPnrimportHistory.getSuppliername();
                     System.out.println(rvPnrimportHistory.getAgentname());
                     writer1.writeNext(header);
                     file.setWritable(true);
@@ -321,6 +330,10 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
       fileOutputStream.close();
      return "closed";
 
+    }
+    @PostMapping(value = "/getallr", produces = {"application/stream+json"})
+    public Flux<RvPnrimportHistory>rvPnrimportHistoryFluxs(@RequestBody ReportSearch reportSearch){
+        return services.getrv(reportSearch.getOrgname());
     }
 }
 
