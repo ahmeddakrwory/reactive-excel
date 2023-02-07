@@ -19,20 +19,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.nio.channels.FileLock;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:9090")
@@ -238,7 +238,10 @@ public class TestController {
     @TransactionalEventListener
 public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch) throws IOException {
         String generatedString = RandomStringUtils.randomAlphabetic(10);
+        Flux<RvPnrimportHistory>all=null;
     File file = new File("D://"+generatedString+".csv");
+        //Long count= rvPnrimportHistoryRepo.count();
+     Mono<Long>count =rvPnrimportHistoryRepo.count();
     CSVWriter writer1;
     FileWriter outputfile=new FileWriter(file);
     try {
@@ -246,28 +249,38 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
         writer1 = new CSVWriter(outputfile);
         String[] header = {"spnr", "orgname"};
 
+
         writer1.writeNext(header);
-//             Flux<TtUser> all = new Flux[]{repo.findAll()};
-            rvPnrimportHistoryRepo.findAll()
+
+  all= (Flux<RvPnrimportHistory>) rvPnrimportHistoryRepo.findAll().doOnNext(s->{
+              System.out.println(s.getAgentname());
+          }).doOnComplete(() -> {
+              try {
+                  writer1.close();
+              } catch (IOException e) {
+                  throw new RuntimeException(e);
+              }
+          })
                 .subscribe(rvPnrimportHistory ->{
 
                     header[0]=rvPnrimportHistory.getAgentname();
                     header[1]=rvPnrimportHistory.getOrgname();
                     System.out.println(rvPnrimportHistory.getAgentname());
                     writer1.writeNext(header);
+                    file.setWritable(true);
+                    file.setWritable(true);
+//                    s1=rvPnrimportHistory.getOrgname();
+
                 });
 
 
-
     }
-    catch (RuntimeException r){r.printStackTrace();}
+    catch (RuntimeException r){r.printStackTrace()
 
-//        finally {
-//
-//            outputfile.close();
-//        }
+    ;}
 
-//        outputfile.close();
+
+
     return generatedString;
 }
     @GetMapping("/downloadcsv/{fileName}")
@@ -301,7 +314,14 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
             message = "Could not delete the file: " + filename + ". Error: " + e.getMessage();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
         }}
+@GetMapping("/close/{filename}")
+         public String close(@PathVariable String filename) throws IOException {
+        File file1=new File("D://"+filename+".csv");
+      FileOutputStream fileOutputStream=new FileOutputStream(file);
+      fileOutputStream.close();
+     return "closed";
 
+    }
 }
 
 
