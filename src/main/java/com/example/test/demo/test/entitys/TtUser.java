@@ -2,6 +2,7 @@ package com.example.test.demo.test.entitys;
 
 
 
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.Column;
@@ -10,11 +11,12 @@ import java.time.Instant;
 
 
 @Table( "tt_user")
+
 public class TtUser {
     @Id
 
     @Column( name="USER_ID")
-    private Integer id;
+    private Long id;
 
     @Column( name = "USER_ALIAS")
     private String userAlias;
@@ -88,11 +90,11 @@ public class TtUser {
     @Column( name = "LAST_MODIFIED_PASS_TIME")
     private Instant lastModifiedPassTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

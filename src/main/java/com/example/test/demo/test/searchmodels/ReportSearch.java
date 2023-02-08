@@ -1,9 +1,11 @@
 package com.example.test.demo.test.searchmodels;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReportSearch {
-    private String orgname;
+    private ArrayList<String> orgname;
     private Date Fdate;
     private  Date Tdate;
 
@@ -15,9 +17,23 @@ public class ReportSearch {
         Fdate = fdate;
     }
 
-    public ReportSearch(String orgname, Date tdate) {
+
+    public ReportSearch(ArrayList<String> orgname, Date fdate, Date tdate) {
         this.orgname = orgname;
+        Fdate = fdate;
         Tdate = tdate;
+    }
+
+    public ArrayList<String> getOrgname() {
+        return orgname;
+    }
+
+    public ReportSearch(ArrayList<String> orgname) {
+        this.orgname = orgname;
+    }
+
+    public void setOrgname(ArrayList<String> orgname) {
+        this.orgname = orgname;
     }
 
     public Date getTdate() {
@@ -26,21 +42,6 @@ public class ReportSearch {
 
     public void setTdate(Date tdate) {
         Tdate = tdate;
-    }
-
-    public ReportSearch() {
-    }
-
-    public ReportSearch(String orgname) {
-        this.orgname = orgname;
-    }
-
-    public String getOrgname() {
-        return orgname;
-    }
-
-    public void setOrgname(String orgname) {
-        this.orgname = orgname;
     }
 }
 

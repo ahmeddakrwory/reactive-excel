@@ -4,6 +4,7 @@ import com.example.test.demo.test.entitys.RvPnrimportHistory;
 import com.example.test.demo.test.entitys.TtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
 import javax.persistence.StoredProcedureQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.data.domain.Sort.Order.by;
 import static org.springframework.data.domain.Sort.Order.desc;
@@ -38,18 +42,22 @@ public class Services {
    @Transactional
     public Flux<TtUser>getsql() {
 //   String query="FROM TtUser";
-String selcet="1=1";
+List<String>s=new ArrayList<String>();
+s.add("M.Ashraf");
+s.add("e.ramzy@ndceg.com");
        return
-       entityTemplate.select(query(where("userAlias").is("e.ramzy@ndceg.com")), TtUser.class);
+       entityTemplate.select(query(where("userAlias").in(s)), TtUser.class);
 
 }
 //@Transactional
 //    public Flux<Object> getfinace (){
 //
 //}
-    @Transactional
-    Flux<RvPnrimportHistory>getrv(String s){
+//    @Transactional
+    Flux<RvPnrimportHistory>getrv(ArrayList<String> s){
+
         return
-                entityTemplate.select(query(where("orgname").in(s)), RvPnrimportHistory.class);
+
+        entityTemplate.select(query(where("orgname").in(s)), RvPnrimportHistory.class);
     }
 }

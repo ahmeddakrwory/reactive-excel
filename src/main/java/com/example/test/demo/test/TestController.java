@@ -70,42 +70,44 @@ public class TestController {
     @GetMapping(value = "/getAllusers", produces = {"application/stream+json"})
     public  Flux<TtUser> prepare() throws IOException {
 //        final int[] i = {0};
-        List<TtUser > user=new ArrayList<>();
-        String[] data2 = new String[3];
-        List<String[]> data = new ArrayList<String[]>();
-        File file = new File("D://ffb2.csv");
-        CSVWriter writer1;
-        FileWriter outputfile=new FileWriter(file);
-        try {
+//        List<TtUser > user=new ArrayList<>();
+//        String[] data2 = new String[3];
+//        List<String[]> data = new ArrayList<String[]>();
+//        File file = new File("D://ffb2.csv");
+//        CSVWriter writer1;
+//        FileWriter outputfile=new FileWriter(file);
+//        try {
+//
+//            writer1 = new CSVWriter(outputfile);
+//            String[] header = {"firstName", "email"};
+////            writer1.writeAll(data);
+//            String[] header2 = {"www", "ss"};
+//            String[] header3 = {"www3", "ss33"};
+//            writer1.writeNext(header);
+//            writer1.writeNext(header2);
+//            writer1.writeNext(header);
+////             Flux<TtUser> all = new Flux[]{repo.findAll()};
+//            repo.findAll()
+//            .subscribe(ttUser ->{
+//
+//
+//                System.out.println(ttUser.getFirstName());
+//                writer1.writeNext(header3);
+//            });
+//
+//
+//
+//        } finally {
+//
+//            outputfile.close();
+//        return repo.findAll();
+//        }
 
-            writer1 = new CSVWriter(outputfile);
-            String[] header = {"firstName", "email"};
-//            writer1.writeAll(data);
-            String[] header2 = {"www", "ss"};
-            String[] header3 = {"www3", "ss33"};
-            writer1.writeNext(header);
-            writer1.writeNext(header2);
-            writer1.writeNext(header);
-//             Flux<TtUser> all = new Flux[]{repo.findAll()};
-            repo.findAll()
-            .subscribe(ttUser ->{
+List<String>allieses=new ArrayList<String>();
+allieses.add("esaady");
+allieses.add("M.Ashraf");
 
-
-                System.out.println(ttUser.getFirstName());
-                writer1.writeNext(header3);
-            });
-
-
-
-        } finally {
-
-            outputfile.close();
-        return repo.findAll();
-        }
-
-
-
-
+return  services.getsql();
     }
 
 
@@ -157,91 +159,91 @@ public class TestController {
         });
     }
 
-    @GetMapping(value = "/preparehistoryd", produces = {"application/stream+json"})
-    public ResponseEntity<Mono<Resource>> downloapdCsv() {
-        String fileName = String.format("%s.csv", RandomStringUtils.randomAlphabetic(10));
-//        csvWriterService.setAll(data());
-        historyCvWriter.setAllpnr(rvPnrimportHistories);
-        return ResponseEntity.ok()
+//    @GetMapping(value = "/preparehistoryd", produces = {"application/stream+json"})
+//    public ResponseEntity<Mono<Resource>> downloapdCsv() {
+//        String fileName = String.format("%s.csv", RandomStringUtils.randomAlphabetic(10));
+////        csvWriterService.setAll(data());
+//        historyCvWriter.setAllpnr(rvPnrimportHistories);
+//        return ResponseEntity.ok()
+//
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
+//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
+//                .body(historyCvWriter.generateCsv()
+//                        .flatMap(x -> {
+//                            Resource resource = new InputStreamResource(x);
+//                            return Mono.just(resource);
+//                        }));
+//
+//    }
 
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
-                .body(historyCvWriter.generateCsv()
-                        .flatMap(x -> {
-                            Resource resource = new InputStreamResource(x);
-                            return Mono.just(resource);
-                        }));
-
-    }
-
-    @PostMapping(value = "/byspnr", produces = {"application/stream+json"})
-    @ResponseBody
-    public Disposable rvPnrimportHistoryFlux(@RequestBody ReportSearch reportSearch) {
-//        ReportSearch spnr =new ReportSearch("VIW5KK");
-        rvPnrimportHistories = new ArrayList<RvPnrimportHistory>();
-        return historyService.getbySpnr(reportSearch).subscribe(value -> {
-            System.out.println("aaaaaaa"+value.getSpPnr());
-            rvPnrimportHistories.add(value);
-        });
-    }
+//    @PostMapping(value = "/byspnr", produces = {"application/stream+json"})
+//    @ResponseBody
+//    public Disposable rvPnrimportHistoryFlux(@RequestBody ReportSearch reportSearch) {
+////        ReportSearch spnr =new ReportSearch("VIW5KK");
+//        rvPnrimportHistories = new ArrayList<RvPnrimportHistory>();
+//        return historyService.getbySpnr(reportSearch).subscribe(value -> {
+//            System.out.println("aaaaaaa"+value.getSpPnr());
+//            rvPnrimportHistories.add(value);
+//        });
+//    }
     @GetMapping (value = "/fr", produces = {"application/stream+json"})
     public Flux<RvFinancialreport> getf(){
         return rvFinancialreportRepo.findAll();
     }
 
 
-   @GetMapping(value = "/emptiy")
-    public  void empityCash(){
-        rvPnrimportHistories=null;
-       System.out.println("Cleard");
-   }
+//   @GetMapping(value = "/emptiy")
+//    public  void empityCash(){
+//        rvPnrimportHistories=null;
+//       System.out.println("Cleard");
+//   }
 
-    @GetMapping(value = "/getAlluserss", produces = {"application/stream+json"})
-    public  Disposable preparse() throws IOException {
-//        final int[] i = {0};
-        List<TtUser > user=new ArrayList<>();
-        String[] data2 = new String[3];
-        List<String[]> data = new ArrayList<String[]>();
-        File file = new File("D://ffb2.csv");
-        CSVWriter writer1;
-        FileWriter outputfile=new FileWriter(file);
-        try {
-
-            writer1 = new CSVWriter(outputfile);
-            String[] header = {"firstName", "email"};
-//            writer1.writeAll(data);
-            String[] header2 = {"www", "ss"};
-            String[] header3 = {"www3", "ss33"};
-            writer1.writeNext(header);
-            writer1.writeNext(header2);
-            writer1.writeNext(header);
-//             Flux<TtUser> all = new Flux[]{repo.findAll()};
-          return   repo.findAll()
-                    .subscribe(ttUser ->{
-
-                    header3[0]=ttUser.getEmail();
-                        System.out.println(ttUser.getFirstName());
-                        writer1.writeNext(header3);
-                    });
-
-
-
-        }
-        catch (RuntimeException r){r.printStackTrace();}
-
-//        finally {
+//    @GetMapping(value = "/getAlluserss", produces = {"application/stream+json"})
+//    public  Disposable preparse() throws IOException {
+////        final int[] i = {0};
+//        List<TtUser > user=new ArrayList<>();
+//        String[] data2 = new String[3];
+//        List<String[]> data = new ArrayList<String[]>();
+//        File file = new File("D://ffb2.csv");
+//        CSVWriter writer1;
+//        FileWriter outputfile=new FileWriter(file);
+//        try {
 //
-          outputfile.close();
+//            writer1 = new CSVWriter(outputfile);
+//            String[] header = {"firstName", "email"};
+////            writer1.writeAll(data);
+//            String[] header2 = {"www", "ss"};
+//            String[] header3 = {"www3", "ss33"};
+//            writer1.writeNext(header);
+//            writer1.writeNext(header2);
+//            writer1.writeNext(header);
+////             Flux<TtUser> all = new Flux[]{repo.findAll()};
+//          return   repo.findAll()
+//                    .subscribe(ttUser ->{
+//
+//                    header3[0]=ttUser.getEmail();
+//                        System.out.println(ttUser.getFirstName());
+//                        writer1.writeNext(header3);
+//                    });
+//
+//
+//
 //        }
+//        catch (RuntimeException r){r.printStackTrace();}
+//
+////        finally {
+////
+//          outputfile.close();
+////        }
 
-        return null;
-    }
+//        return null;
+//    }
     @PostMapping("/pnrstram")
 
 public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch) throws IOException {
         Date date1 = new Date();
         String generatedString = RandomStringUtils.randomAlphabetic(10);
-        Flux<RvPnrimportHistory>all=null;
+//        Flux<RvPnrimportHistory>all=null;
 //        Flux<RvPnrimportHistory>rvPnrimportHistoryFlux=services.getrv(reportSearch.getOrgname());
     File file = new File("D://"+generatedString+".csv");
         //Long count= rvPnrimportHistoryRepo.count();
@@ -253,10 +255,10 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
         writer1 = new CSVWriter(outputfile);
         String[] header = {"spnr", "orgname","suppliername"};
 
-
+     //   rvPnrimportHistoryRepo.findAll()
         writer1.writeNext(header);
-//        services.getrv(reportSearch.getOrgname()
-        rvPnrimportHistoryRepo.findAll().doOnNext(s->{
+      services.getrv(reportSearch.getOrgname())
+        .doOnNext(s->{
               System.out.println(s.getAgentname());
           }).doOnComplete(() -> {
               try {
@@ -268,17 +270,18 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
               } catch (IOException e) {
                   throw new RuntimeException(e);
               }
+
           })
                 .subscribe(rvPnrimportHistory ->{
 
-                    header[0]=rvPnrimportHistory.getAgentname();
+                    header[0]=rvPnrimportHistory.getSpPnr();
                     header[1]=rvPnrimportHistory.getOrgname();
                     header[2]=rvPnrimportHistory.getSuppliername();
                     System.out.println(rvPnrimportHistory.getAgentname());
                     writer1.writeNext(header);
                     file.setWritable(true);
                     file.setWritable(true);
-//                    s1=rvPnrimportHistory.getOrgname();
+//                    generatedString="wating";
 
                 });
 
@@ -334,6 +337,63 @@ public String gitpnrHistoryGeneratedfile(@RequestBody  ReportSearch reportSearch
     @PostMapping(value = "/getallr", produces = {"application/stream+json"})
     public Flux<RvPnrimportHistory>rvPnrimportHistoryFluxs(@RequestBody ReportSearch reportSearch){
         return services.getrv(reportSearch.getOrgname());
+    }
+    @PostMapping("/pnrstramall")
+
+    public String gitpnrHistoryGeneratedfileall(@RequestBody  ReportSearch reportSearch) throws IOException {
+        Date date1 = new Date();
+        String generatedString = RandomStringUtils.randomAlphabetic(10);
+        Flux<RvPnrimportHistory>all=null;
+//        Flux<RvPnrimportHistory>rvPnrimportHistoryFlux=services.getrv(reportSearch.getOrgname());
+        File file = new File("D://"+generatedString+".csv");
+        //Long count= rvPnrimportHistoryRepo.count();
+//     Mono<Long>count =rvPnrimportHistoryRepo.count();
+        CSVWriter writer1;
+        FileWriter outputfile=new FileWriter(file);
+        try {
+
+            writer1 = new CSVWriter(outputfile);
+            String[] header = {"spnr", "orgname","suppliername"};
+
+            //   rvPnrimportHistoryRepo.findAll()
+            writer1.writeNext(header);
+            rvPnrimportHistoryRepo.findAll()
+                    .doOnNext(s->{
+                        System.out.println(s.getAgentname());
+                    }).doOnComplete(() -> {
+                        try {
+                            writer1.close();
+                            Date date2 = new  Date();
+                            long diffInMillies = date2.getTime() - date1.getTime();
+                            System.out.println(diffInMillies);
+
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    })
+                    .subscribe(rvPnrimportHistory ->{
+
+                        header[0]=rvPnrimportHistory.getSpPnr();
+                        header[1]=rvPnrimportHistory.getOrgname();
+                        header[2]=rvPnrimportHistory.getSuppliername();
+                        System.out.println(rvPnrimportHistory.getAgentname());
+                        writer1.writeNext(header);
+                        file.setWritable(true);
+                        file.setWritable(true);
+//                    generatedString="wating";
+
+                    });
+
+
+        }
+        catch (RuntimeException r){r.printStackTrace()
+
+        ;}
+
+
+
+        return generatedString;
     }
 }
 
