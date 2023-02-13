@@ -1,18 +1,21 @@
 package com.example.test.demo.test.entitys;
 
-import org.hibernate.annotations.Immutable;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Mapping for DB view
  */
 
-@Immutable
+
 @Table(name = "rv_pnrimport_history")
 public class RvPnrimportHistory {
     @Column( "AGENTNAME")
@@ -36,8 +39,9 @@ public class RvPnrimportHistory {
     @Column( "AGENT_ID")
     private Integer agentId;
 
-    @Column( "IMPORT_DATE_TIM")
-    private Instant importDateTime;
+    @Column( "IMPORT_DATE_TIME")
+
+    private LocalDateTime importDateTime;
 
     @Column( "PCC_ID")
     private Integer pccId;
@@ -73,7 +77,7 @@ public class RvPnrimportHistory {
         return agentId;
     }
 
-    public Instant getImportDateTime() {
+    public LocalDateTime  getImportDateTime() {
         return importDateTime;
     }
 

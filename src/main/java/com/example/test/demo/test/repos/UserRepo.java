@@ -11,6 +11,10 @@ import java.util.List;
 
 @Repository
 public interface UserRepo extends R2dbcRepository<TtUser,Long> {
+@Query(value = "SELECT * from  tt_user")
+    public  Flux<TtUser>getallsql();
 
+    @Query(value = "SELECT * from  tt_user")
+Flux<Object>getallasobject();
 
 }

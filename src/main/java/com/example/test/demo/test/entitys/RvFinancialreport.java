@@ -1,265 +1,217 @@
 package com.example.test.demo.test.entitys;
 
-import org.hibernate.annotations.Immutable;
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
+
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * Mapping for DB view
  */
 
-@Immutable
-@Table(name = "rv_financialreport")
+@Table( "rv_financialreport")
 public class RvFinancialreport {
-    @Column(name = "REF", nullable = false, length = 50)
+
+    @Id
+    @Column( "ref")
     private String ref;
 
-    @Column(name = "CNAME", length = 161)
-    private String cname;
-
-    @Column(name = "CTITLE")
-    private Integer ctitle;
-
-    @Column(name = "CCITY", length = 100)
-    private String ccity;
-
-    @Column(name = "CCOUNTRY", length = 80)
-    private String ccountry;
-
-    @Column(name = "CMOBILE", length = 50)
-    private String cmobile;
-
-    @Column(name = "CEMAIL", length = 80)
-    private String cemail;
-
-    @Column(name = "TICKET_NO", length = 50)
-    private String ticketNo;
-
-    @Column(name = "AIRLINE_PNR", length = 50)
-    private String airlinePnr;
-
-    @Column(name = "SP_PNR", length = 50)
-    private String spPnr;
-
-    @Column(name = "TRIP_TYPE")
+    @Column( "TRIP_TYPE")
     private Integer tripType;
 
-    @Column(name = "ORIGIN", nullable = false, length = 50)
+    @Column( "ORIGIN")
     private String origin;
 
-    @Column(name = "DESTINATION", nullable = false, length = 50)
+    @Column( "DESTINATION")
     private String destination;
 
-    @Column(name = "NO_OF_SEGMENT")
+    @Column( "NO_OF_SEGMENT")
     private Integer noOfSegment;
 
-    @Column(name = "BOOKING_CLASS", nullable = false, length = 20)
-    private String bookingClass;
-
-    @Column(name = "CABIN_CLASS")
-    private Integer cabinClass;
-
-    @Column(name = "SUPPLIER_NAME", length = 100)
+    @Column( "SUPPLIER_NAME")
     private String supplierName;
 
-    @Column(name = "TOTAL_BASE_FARE")
+    @Column( "TOTAL_BASE_FARE")
     private Float totalBaseFare;
 
-    @Column(name = "TOTAL_FEE_N_TAXES")
+    @Column( "TOTAL_FEE_N_TAXES")
     private Float totalFeeNTaxes;
 
-    @Column(name = "TOTAL_ODEYSYS_MARKUP")
+    @Column( "TOTAL_ODEYSYS_MARKUP")
     private Float totalOdeysysMarkup;
 
-    @Column(name = "TOTAL_ODEYSYS_SERVICE_CHARGE")
+    @Column( "TOTAL_ODEYSYS_SERVICE_CHARGE")
     private Float totalOdeysysServiceCharge;
 
-    @Column(name = "TOTAL_ODEYSYS_DISCOUNT")
+    @Column( "TOTAL_ODEYSYS_DISCOUNT")
     private Float totalOdeysysDiscount;
 
-    @Column(name = "ODEYSYS_BSP_COMMISION")
-    private Float odeysysBspCommision;
-
-    @Column(name = "ODEYSYS_BSP_COMMISSION_PER")
-    private Float odeysysBspCommissionPer;
-
-    @Column(name = "TOTAL_ODEYSYS_AGENCY_MARKUP")
+    @Column( "TOTAL_ODEYSYS_AGENCY_MARKUP")
     private Float totalOdeysysAgencyMarkup;
 
-    @Column(name = "TOTAL_ODEYSYS_AGENT_ONFLY_MARKUP")
+    @Column( "TOTAL_ODEYSYS_AGENT_ONFLY_MARKUP")
     private Float totalOdeysysAgentOnflyMarkup;
 
-    @Column(name = "TOTAL_ODEYSYS_FARE")
+    @Column( "TOTAL_ODEYSYS_FARE")
     private Float totalOdeysysFare;
 
-    @Column(name = "PAYMENT_MODE")
-    private Integer paymentMode;
+    @Column( "cDate")
+    private LocalDateTime cDate;
 
-    @Column(name = "PTIME", nullable = false)
-    private Instant ptime;
+    @Column( "tCust")
+    private Integer tCust;
 
-    @Column(name = "AGENCY_ID", nullable = false, length = 50)
-    private String agencyId;
+    @Column(  "oId")
+    private String oId;
 
-    @Column(name = "BRANCH_ID", nullable = false, length = 50)
-    private String branchId;
-
-    @Column(name = "CDATE", nullable = false)
-    private Instant cdate;
-
-    @Column(name = "PTYPE", nullable = false)
-    private Integer ptype;
-
-    @Column(name = "CTYPE")
-    private Integer ctype;
-
-    @Column(name = "SDATE", nullable = false)
-    private Instant sdate;
-
-    @Column(name = "TCUST")
-    private Integer tcust;
-
-    @Column(name = "UNAME", length = 100)
-    private String uname;
-
-    @Column(name = "BSTATUS", nullable = false)
-    private String bstatus;
-
-    @Column(name = "OID", nullable = false, length = 50)
-    private String oid;
-
-    @Column(name = "INVOICE_NUMBER", length = 20)
-    private String invoiceNumber;
-
-    @Column(name = "DOB", length = 20)
-    private String dob;
-
-    @Column(name = "REFUNDAMOUNT", precision = 10, scale = 3)
-    private BigDecimal refundamount;
-
-    @Column(name = "REFUNDCANCELATIONAMOUNT", precision = 10, scale = 3)
-    private BigDecimal refundcancelationamount;
-
-    @Column(name = "AGENCYNAME", length = 100)
-    private String agencyname;
-
-    @Column(name = "TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP", precision = 10, scale = 3)
+    @Column( "TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP")
     private BigDecimal totalOdeysysBranchOnflyMarkup;
 
-    @Column(name = "BOOKING_TYPE")
+    @Column( "BOOKING_TYPE")
     private Integer bookingType;
 
-    @Column(name = "IMPORT_PNR_CASE")
+    @Column( "IMPORT_PNR_CASE")
     private Integer importPnrCase;
 
-    @Column(name = "ODEYSYS_BSP_COMMISSION_PER_CHILD")
-    private Float odeysysBspCommissionPerChild;
+    @Column( "cNAME")
+    private String cNAME;
 
-    @Column(name = "ODEYSYS_BSP_COMMISION_CHILD")
-    private Float odeysysBspCommisionChild;
+    @Column("ctitle")
+    private Integer ctitle;
 
-    @Column(name = "PAX_BASE_FARE")
+    @Column( "ccountry")
+    private String ccountry;
+
+    @Column("cmobile")
+    private String cmobile;
+
+    @Column( "cemail")
+    private String cemail;
+
+    @Column( "DOB")
+    private String dob;
+
+    @Column( "ccity")
+    private String ccity;
+
+    @Column("cType")
+    private Integer cType;
+
+    @Column( "TICKET_NO")
+    private String ticketNo;
+
+    @Column(  "PAX_BASE_FARE")
     private Float paxBaseFare;
 
-    @Column(name = "PAX_FEE_N_TAXES")
+    @Column( "PAX_FEE_N_TAXES")
     private Float paxFeeNTaxes;
 
-    @Column(name = "PAX_ODEYSYS_MARKUP")
+    @Column( "PAX_ODEYSYS_MARKUP")
     private Float paxOdeysysMarkup;
 
-    @Column(name = "PAX_ODEYSYS_SERVICE_CHARGE")
+    @Column( "PAX_ODEYSYS_SERVICE_CHARGE")
     private Float paxOdeysysServiceCharge;
 
-    @Column(name = "PAX_ODEYSYS_DISCOUNT")
+    @Column( "PAX_ODEYSYS_DISCOUNT")
     private Float paxOdeysysDiscount;
 
-    @Column(name = "TCPAX", nullable = false)
-    private Long tcpax;
+    @Column(  "AIRLINE_PNR")
+    private String airlinePnr;
 
-    @Column(name = "IATANUMBER", length = 100)
-    private String iatanumber;
+    @Column(  "SP_PNR")
+    private String spPnr;
 
-    @Column(name = "BRANCHNAME", length = 100)
-    private String branchname;
+    @Column(  "BOOKING_CLASS")
+    private String bookingClass;
 
-    @Column(name = "REFUNDSTATUS")
-    private Integer refundstatus;
+    @Column(  "CABIN_CLASS")
+    private Integer cabinClass;
 
-    @Column(name = "AGENTORDERSTATUS")
-    private Integer agentorderstatus;
+    @Column(  "ODEYSYS_BSP_COMMISION")
+    private Float odeysysBspCommision;
 
-    @Column(name = "SSRAMOUNT")
-    private Double ssramount;
+    @Column(  "ODEYSYS_BSP_COMMISSION_PER")
+    private Float odeysysBspCommissionPer;
 
-    @Column(name = "REFUNDDATE")
-    private Instant refunddate;
+    @Column(  "INVOICE_NUMBER")
+    private String invoiceNumber;
 
-    @Column(name = "MANUAL_MARKUP")
+    @Column(  "ODEYSYS_BSP_COMMISSION_PER_CHILD")
+    private Float odeysysBspCommissionPerChild;
+
+    @Column(  "ODEYSYS_BSP_COMMISION_CHILD")
+    private Float odeysysBspCommisionChild;
+
+    @Column(  "MANUAL_MARKUP")
     private Float manualMarkup;
 
-    @Lob
-    @Column(name = "PCCIATANUMBER")
-    private String pcciatanumber;
+    @Column(  "PAYMENT_MODE")
+    private Integer paymentMode;
 
-    @Column(name = "NDCSTAFFNAME", nullable = false, length = 100)
-    private String ndcstaffname;
+    @Column(  "ptime")
+    private LocalDateTime ptime;
 
-    @Column(name = "TOTAL_SURCHARGE_AMOUNT", nullable = false)
-    private Double totalSurchargeAmount;
+    @Column(  "AGENCY_ID")
+    private String agencyId;
 
-    @Column(name = "STATE_NAME", length = 125)
-    private String stateName;
+    @Column(  "BRANCH_ID")
+    private String branchId;
 
-    @Column(name = "CITY_NAME", length = 125)
-    private String cityName;
+    @Column(  "pType")
+    private Integer pType;
 
-    @Column(name = "ORGANIZATION_ID", nullable = false, length = 50)
-    private String organizationId;
+    @Column(  "agentOrderStatus")
+    private Integer agentOrderStatus;
+
+    @Column(  "uName")
+    private String uName;
+
+    @Column(  "bStatus")
+    private String bStatus;
+
+    @Column(  "sDate")
+    private LocalDateTime sDate;
+
+    @Column(  "refundAmount")
+    private BigDecimal refundAmount;
+
+    @Column(  "refundCancelationAmount")
+    private BigDecimal refundCancelationAmount;
+
+    @Column(  "agencyName")
+    private String agencyName;
+
+    @Column(  "tcPax")
+    private Long tcPax;
+
+    @Column(  "iatanumber")
+    private String iatanumber;
+
+    @Column(  "branchName")
+    private String branchName;
+
+    @Column(  "refundStatus")
+    private Integer refundStatus;
+
+    @Column(  "ssramount")
+    private Double ssramount;
+
+    @Column(  "refundDate")
+    private LocalDateTime refundDate;
+
+
+    @Column(  "pccIataNumber")
+    private String pccIataNumber;
 
     public String getRef() {
         return ref;
-    }
-
-    public String getCname() {
-        return cname;
-    }
-
-    public Integer getCtitle() {
-        return ctitle;
-    }
-
-    public String getCcity() {
-        return ccity;
-    }
-
-    public String getCcountry() {
-        return ccountry;
-    }
-
-    public String getCmobile() {
-        return cmobile;
-    }
-
-    public String getCemail() {
-        return cemail;
-    }
-
-    public String getTicketNo() {
-        return ticketNo;
-    }
-
-    public String getAirlinePnr() {
-        return airlinePnr;
-    }
-
-    public String getSpPnr() {
-        return spPnr;
     }
 
     public Integer getTripType() {
@@ -276,14 +228,6 @@ public class RvFinancialreport {
 
     public Integer getNoOfSegment() {
         return noOfSegment;
-    }
-
-    public String getBookingClass() {
-        return bookingClass;
-    }
-
-    public Integer getCabinClass() {
-        return cabinClass;
     }
 
     public String getSupplierName() {
@@ -310,14 +254,6 @@ public class RvFinancialreport {
         return totalOdeysysDiscount;
     }
 
-    public Float getOdeysysBspCommision() {
-        return odeysysBspCommision;
-    }
-
-    public Float getOdeysysBspCommissionPer() {
-        return odeysysBspCommissionPer;
-    }
-
     public Float getTotalOdeysysAgencyMarkup() {
         return totalOdeysysAgencyMarkup;
     }
@@ -330,72 +266,16 @@ public class RvFinancialreport {
         return totalOdeysysFare;
     }
 
-    public Integer getPaymentMode() {
-        return paymentMode;
+    public  LocalDateTime getCDate() {
+        return cDate;
     }
 
-    public Instant getPtime() {
-        return ptime;
+    public Integer getTCust() {
+        return tCust;
     }
 
-    public String getAgencyId() {
-        return agencyId;
-    }
-
-    public String getBranchId() {
-        return branchId;
-    }
-
-    public Instant getCdate() {
-        return cdate;
-    }
-
-    public Integer getPtype() {
-        return ptype;
-    }
-
-    public Integer getCtype() {
-        return ctype;
-    }
-
-    public Instant getSdate() {
-        return sdate;
-    }
-
-    public Integer getTcust() {
-        return tcust;
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public String getBstatus() {
-        return bstatus;
-    }
-
-    public String getOid() {
-        return oid;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public BigDecimal getRefundamount() {
-        return refundamount;
-    }
-
-    public BigDecimal getRefundcancelationamount() {
-        return refundcancelationamount;
-    }
-
-    public String getAgencyname() {
-        return agencyname;
+    public String getOId() {
+        return oId;
     }
 
     public BigDecimal getTotalOdeysysBranchOnflyMarkup() {
@@ -410,12 +290,40 @@ public class RvFinancialreport {
         return importPnrCase;
     }
 
-    public Float getOdeysysBspCommissionPerChild() {
-        return odeysysBspCommissionPerChild;
+    public String getCNAME() {
+        return cNAME;
     }
 
-    public Float getOdeysysBspCommisionChild() {
-        return odeysysBspCommisionChild;
+    public Integer getCtitle() {
+        return ctitle;
+    }
+
+    public String getCcountry() {
+        return ccountry;
+    }
+
+    public String getCmobile() {
+        return cmobile;
+    }
+
+    public String getCemail() {
+        return cemail;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getCcity() {
+        return ccity;
+    }
+
+    public Integer getCType() {
+        return cType;
+    }
+
+    public String getTicketNo() {
+        return ticketNo;
     }
 
     public Float getPaxBaseFare() {
@@ -438,60 +346,120 @@ public class RvFinancialreport {
         return paxOdeysysDiscount;
     }
 
-    public Long getTcpax() {
-        return tcpax;
+    public String getAirlinePnr() {
+        return airlinePnr;
     }
 
-    public String getIatanumber() {
-        return iatanumber;
+    public String getSpPnr() {
+        return spPnr;
     }
 
-    public String getBranchname() {
-        return branchname;
+    public String getBookingClass() {
+        return bookingClass;
     }
 
-    public Integer getRefundstatus() {
-        return refundstatus;
+    public Integer getCabinClass() {
+        return cabinClass;
     }
 
-    public Integer getAgentorderstatus() {
-        return agentorderstatus;
+    public Float getOdeysysBspCommision() {
+        return odeysysBspCommision;
     }
 
-    public Double getSsramount() {
-        return ssramount;
+    public Float getOdeysysBspCommissionPer() {
+        return odeysysBspCommissionPer;
     }
 
-    public Instant getRefunddate() {
-        return refunddate;
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public Float getOdeysysBspCommissionPerChild() {
+        return odeysysBspCommissionPerChild;
+    }
+
+    public Float getOdeysysBspCommisionChild() {
+        return odeysysBspCommisionChild;
     }
 
     public Float getManualMarkup() {
         return manualMarkup;
     }
 
-    public String getPcciatanumber() {
-        return pcciatanumber;
+    public Integer getPaymentMode() {
+        return paymentMode;
     }
 
-    public String getNdcstaffname() {
-        return ndcstaffname;
+    public  LocalDateTime getPtime() {
+        return ptime;
     }
 
-    public Double getTotalSurchargeAmount() {
-        return totalSurchargeAmount;
+    public String getAgencyId() {
+        return agencyId;
     }
 
-    public String getStateName() {
-        return stateName;
+    public String getBranchId() {
+        return branchId;
     }
 
-    public String getCityName() {
-        return cityName;
+    public Integer getPType() {
+        return pType;
     }
 
-    public String getOrganizationId() {
-        return organizationId;
+    public Integer getAgentOrderStatus() {
+        return agentOrderStatus;
+    }
+
+    public String getUName() {
+        return uName;
+    }
+
+    public String getBStatus() {
+        return bStatus;
+    }
+
+    public  LocalDateTime getSDate() {
+        return sDate;
+    }
+
+    public BigDecimal getRefundAmount() {
+        return refundAmount;
+    }
+
+    public BigDecimal getRefundCancelationAmount() {
+        return refundCancelationAmount;
+    }
+
+    public String getAgencyName() {
+        return agencyName;
+    }
+
+    public Long getTcPax() {
+        return tcPax;
+    }
+
+    public String getIatanumber() {
+        return iatanumber;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public Integer getRefundStatus() {
+        return refundStatus;
+    }
+
+    public Double getSsramount() {
+        return ssramount;
+    }
+
+    public  LocalDateTime getRefundDate() {
+        return refundDate;
+    }
+
+    public String getPccIataNumber() {
+        return pccIataNumber;
     }
 
     protected RvFinancialreport() {
