@@ -2,15 +2,14 @@ package com.example.test.demo.test.utils;
 
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Projection {
+public class FinanceProjection {
    String  AGENCY_ID;
    String AGENCYNAME;
    Integer AGENTORDERSTATUS;
@@ -43,8 +42,8 @@ public class Projection {
    Double  TOTAL_ODEYSYS_AGENCY_MARKUP;
    Double  TOTAL_ODEYSYS_AGENT_ONFLY_MARKUP;
     int   PAYMENT_MODE;
-   Date PTIME;
-   Date  CDATE;
+   LocalDateTime PTIME;
+   LocalDateTime CDATE;
     int  CTYPE;
    String  SDATE;
     int   TCUST;
@@ -52,15 +51,19 @@ public class Projection {
    String  OID ;
    String  INVOICE_NUMBER;
    String  DOB;
-   String  REFUNDAMOUNT;
-   String  TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP;
-   String  IMPORT_PNR_CASE;
-   String  PAX_ODEYSYS_SERVICE_CHARGE;
-   String  PAX_FEE_N_TAXES;
-   String  PAX_ODEYSYS_MARKUP;
-   String  PAX_ODEYSYS_DISCOUNT;
-   String  TCPAX;
+   Double  REFUNDAMOUNT;
+   Double  TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP;
+   Integer  IMPORT_PNR_CASE;
+   Double  PAX_ODEYSYS_SERVICE_CHARGE;
+   Double  PAX_FEE_N_TAXES;
+   Double  PAX_ODEYSYS_MARKUP;
+   Double  PAX_ODEYSYS_DISCOUNT;
+   String PCCIATANUMBER;
+   Long  TCPAX;
    Double  MANUAL_MARKUP;
+Integer   CTITLE;
+ Double ODEYSYS_BSP_COMMISSION_PER;
+ Double  TOTAL_ODEYSYS_FARE;
 //   String  IMPORT_PNR_CASE;
 //   String  IMPORT_PNR_CASE;
 

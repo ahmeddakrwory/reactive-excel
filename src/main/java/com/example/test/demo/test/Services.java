@@ -5,7 +5,7 @@ import com.example.test.demo.test.entitys.RvPnrimportHistory;
 import com.example.test.demo.test.entitys.TtUser;
 import com.example.test.demo.test.searchmodels.FinanceSerch;
 
-import com.example.test.demo.test.utils.Projection;
+import com.example.test.demo.test.utils.FinanceProjection;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -372,7 +372,7 @@ s.add("e.ramzy@ndceg.com");
                 .bufferUntilChanged(result -> result.get("REF"))
                 ;
     }
-    public static final  BiFunction<Row, RowMetadata, Projection> MAPPING_FUNCTION = (row, rowMetaData) -> Projection.builder()
+    public static final  BiFunction<Row, RowMetadata, FinanceProjection> MAPPING_FUNCTION = (row, rowMetaData) -> FinanceProjection.builder()
             .AGENCYNAME(row.get("AGENCYNAME", String.class))
             .AGENCY_ID(row.get("AGENCY_ID", String.class))
             .AGENTORDERSTATUS(row.get("AGENTORDERSTATUS", Integer.class))
@@ -390,8 +390,27 @@ s.add("e.ramzy@ndceg.com");
             .TRIP_TYPE(row.get("TRIP_TYPE" ,Integer.class))
             .TOTAL_BASE_FARE(row.get("TOTAL_BASE_FARE",Double.class))
             .BRANCHNAME(row.get("BRANCHNAME",String.class))
+            .CMOBILE(row.get("CMOBILE",String.class))
+            .TCUST(row.get("TCUST", Integer.class))
+            .UNAME(row.get("UNAME", String.class))
+            .OID(row.get("OID", String.class))
+            .INVOICE_NUMBER(row.get("INVOICE_NUMBER", String.class))
+            .REFUNDAMOUNT(row.get("REFUNDAMOUNT", Double.class))
+            .TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP(row.get("TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP", Double.class))
+
+            .IMPORT_PNR_CASE(row.get("IMPORT_PNR_CASE",Integer.class))
+            .PAX_ODEYSYS_SERVICE_CHARGE(row.get("PAX_ODEYSYS_SERVICE_CHARGE", Double.class))
+            .PAX_ODEYSYS_MARKUP(row.get("PAX_ODEYSYS_MARKUP", Double.class))
+            .TCPAX(row.get("TCPAX", Long.class))
+            .MANUAL_MARKUP(row.get("MANUAL_MARKUP", Double.class))
+            .CDATE(row.get("CDATE", LocalDateTime.class))
+            .PTIME(row.get("PTIME",LocalDateTime.class))
+            .CTITLE(row.get("CTITLE",Integer.class))
+            .ODEYSYS_BSP_COMMISSION_PER(row.get("ODEYSYS_BSP_COMMISSION_PER",Double.class))
+            .TOTAL_ODEYSYS_FARE(row.get("TOTAL_ODEYSYS_FARE",Double.class))
+
             .build();
-    public Flux findAlsl() {
+    public Flux <FinanceProjection>findAlsl() {
 
         String query = "SELECT \n" +
                 "    FB.FB_BOOKING_REF_NO AS REF,\n" +
@@ -480,7 +499,7 @@ s.add("e.ramzy@ndceg.com");
                 "\tFBSBD.SEGMENT_REF_NO = 1\n" +
                 "        AND FB.BOOKING_STATUS IN (2 , 5, 8, 9, 12, 13, 15, 16)\n" +
                 "        AND EV.TYPE_NAME = 'BOOKING_STATUS'\n" +
-                "        AND TST.CREATION_TIME BETWEEN '2022-06-1 00:00:00' AND '2022-06-25 23:59:59'\n" +
+                "        AND TST.CREATION_TIME BETWEEN '2020-06-1 00:00:00' AND '2022-08-30 23:59:59'\n" +
                 "        AND APR.ORDER_TYPE = 0\n" +
                 "        AND (AO.AGENCY_ID IN ('AGN3' , 'AGN14',\n" +
                 "        'AGN34',\n" +
@@ -690,8 +709,8 @@ s.add("e.ramzy@ndceg.com");
                 "        AND AO.BRANCH_ID IN ('BRN3')\n" +
                 "        AND AO.AGENCY_ID = 'NULL'\n" +
                 "        \n" +
-                "GROUP BY REF , CNAME , CDATE , PTYPE , CTYPE , SDATE , TCUST , UNAME , BSTATUS , OID";
-        return db.sql(query).map(MAPPING_FUNCTION).all().limitRate(10);
+                "GROUP BY REF , CNAME , CDATE , PTYPE , CTYPE , SDATE , TCUST , UNAME , BSTATUS , OID;";
+        return db.sql(query).map(MAPPING_FUNCTION).all().limitRate(600);
 
     }
 }

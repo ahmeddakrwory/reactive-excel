@@ -8,7 +8,7 @@ import com.example.test.demo.test.repos.*;
 import com.example.test.demo.test.searchmodels.FinanceSerch;
 import com.example.test.demo.test.searchmodels.ReportSearch;
 import com.example.test.demo.test.utils.Pnrhistoryexcel;
-import com.example.test.demo.test.utils.Projection;
+import com.example.test.demo.test.utils.FinanceProjection;
 import com.example.test.demo.test.utils.ResponseMessage;
 import com.example.test.demo.test.utils.StorageService;
 import com.opencsv.CSVWriter;
@@ -30,7 +30,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -369,11 +368,18 @@ public String gitpnrHistoryGeneratedfile() throws IOException {
             String[] header =
 
 
-                    {"spnr", "Agency Id","cname","country","cmobile","Branchname","Dob","Ticket number","clientname"
-                            ,"Countryname","Aitline name","get bocked status","Agency name","Origin","Final dest","Trip type","Start date"
-                            ,"invoice number","Get tootal base pase","Total discount","odsys discount"
-                            ,"get refund date","get refund cancelation amount","get Ref canelation amount","agency markup","Suplier name"
-                    ,"client tytile","Client email","payment time"," iyata nuber","iyata pcc nunber","Employee name","booking type","service charge","totall fee tac"
+                    {"REF", "CNAME","CTITLE","CCITY","CCOUNTRY","CMOBILE","CEMAIL","TICKET_NO","clientname"
+                            ,"AIRLINE_PNR","SP_PNR","TRIP_TYPE","ORIGIN","Origin","DESTINATION","NO_OF_SEGMENT","BOOKING_CLASS"
+                            ,"CABIN_CLASS","SUPPLIER_NAME","TOTAL_BASE_FARE","TOTAL_FEE_N_TAXES","TOTAL_ODEYSYS_SERVICE_CHARGE"
+                            ,"TOTAL_ODEYSYS_DISCOUNT","ODEYSYS_BSP_COMMISION","ODEYSYS_BSP_COMMISSION_PER","TOTAL_ODEYSYS_AGENCY_MARKUP"
+                            ,"TOTAL_ODEYSYS_AGENT_ONFLY_MARKUP","TOTAL_ODEYSYS_FARE","PAYMENT_MODE","PTIME","AGENCY_ID"
+                    ,"BRANCH_ID","BRANCH_ID","CDATE","SDATE","TCUST","UNAME","BSTATUS","OID","INVOICE_NUMBER"
+                    ,"DOB","REFUNDAMOUNT","REFUNDCANCELATIONAMOUNT","AGENCYNAME","TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP"
+                    ,"BOOKING_TYPE","IMPORT_PNR_CASE","ODEYSYS_BSP_COMMISSION_PER_CHILD","ODEYSYS_BSP_COMMISION_CHILD"
+                     ,"PAX_BASE_FARE","PAX_FEE_N_TAXES","PAX_ODEYSYS_MARKUP","PAX_ODEYSYS_SERVICE_CHARGE"
+                      ,"PAX_ODEYSYS_DISCOUNT","PAX_ODEYSYS_DISCOUNT","TCPAX","IATANUMBER","BRANCHNAME"
+                            ,"REFUNDSTATUS","AGENTORDERSTATUS","MANUAL_MARKUP","PCCIATANUMBER","STATE_NAME"
+                            ,"NDCSTAFFNAME","TOTAL_SURCHARGE_AMOUNT","CITY_NAME"
 
                     };
 
@@ -398,7 +404,7 @@ public String gitpnrHistoryGeneratedfile() throws IOException {
                     })
                     .subscribe(rvPnrimportHistory ->{
 
-                        header[0]=rvPnrimportHistory.getSpPnr();
+                        header[0]=rvPnrimportHistory.getRef();
                         header[1]=rvPnrimportHistory.getAgencyId();
                         header[2]=rvPnrimportHistory.getCNAME();
 
@@ -434,7 +440,7 @@ public String gitpnrHistoryGeneratedfile() throws IOException {
                         header[32]=  rvPnrimportHistory.getBookingType()+"";
                         header[33]=  rvPnrimportHistory.getTotalOdeysysServiceCharge()+"";
                         header[34]=  rvPnrimportHistory.getTotalFeeNTaxes()+"";
-
+                        header[34]=  rvPnrimportHistory.getTotalFeeNTaxes()+"";
 //                        header[17]=rvPnrimportHistory.getCcity();
 //                        header[11]=rvPnrimportHistory.getcode;
                         writer1.writeNext(header);
@@ -453,46 +459,120 @@ public String gitpnrHistoryGeneratedfile() throws IOException {
 
         return generatedString;
     }
-    @GetMapping("/getalluser")
-    public String getsql() throws IOException {
-        String generatedString = RandomStringUtils.randomAlphabetic(10);
-        File file = new File("D://"+"finace"+generatedString+".csv");
-        CSVWriter writer1;
-        FileWriter outputfile=new FileWriter(file);
-        writer1=new CSVWriter(outputfile);
-         services.findAll().doOnNext(s->{}).doOnComplete(()->{
-             try {
-                 writer1.close();
-             } catch (IOException e) {
-                 throw new RuntimeException(e);
-             }
-         }).subscribe(maps ->{
-             System.out.println(maps);
-//            System.out.println(maps.get(0));
-//              Object o=maps.get(0);
-
-//             Object[] os=maps.toArray();
-
-
-         });
-       return  generatedString;
-    }
+//    @GetMapping("/getalluser")
+//    public String getsql() throws IOException {
+//        String generatedString = RandomStringUtils.randomAlphabetic(10);
+//        File file = new File("D://"+"finace"+generatedString+".csv");
+//        CSVWriter writer1;
+//        FileWriter outputfile=new FileWriter(file);
+//        writer1=new CSVWriter(outputfile);
+//         services.findAll().doOnNext(s->{}).doOnComplete(()->{
+//             try {
+//                 writer1.close();
+//             } catch (IOException e) {
+//                 throw new RuntimeException(e);
+//             }
+//         }).subscribe(maps ->{
+//             System.out.println(maps);
+////            System.out.println(maps.get(0));
+////              Object o=maps.get(0);
+//
+////             Object[] os=maps.toArray();
+//
+//
+//         });
+//       return  generatedString;
+//    }
     @GetMapping(value = "/getallsqlss",produces = {"application/stream+json"})
     @ResponseBody
-    public Flux getsqls() throws IOException {
-        Flux testing = services.findAlsl();
+    public String getsqls() throws IOException {
+        String generatedString = "finace"+RandomStringUtils.randomAlphabetic(10);
+        File file = new File("D://"+"finace"+generatedString+".csv");
+        Date date1 = new Date();
+        FileWriter outputfile=new FileWriter(file);
+//        CSVWriter writer1 = null;
+        CSVWriter   writer1 = new CSVWriter(outputfile);
+        String[] header =
+
+
+
+
+                {"REF", "CNAME","CTITLE","CCITY","CCOUNTRY","CMOBILE","CEMAIL","TICKET_NO","clientname"
+                        ,"AIRLINE_PNR","SP_PNR","TRIP_TYPE","ORIGIN","Origin","DESTINATION","NO_OF_SEGMENT","BOOKING_CLASS"
+                        ,"CABIN_CLASS","SUPPLIER_NAME","TOTAL_BASE_FARE","TOTAL_FEE_N_TAXES","TOTAL_ODEYSYS_SERVICE_CHARGE"
+                        ,"TOTAL_ODEYSYS_DISCOUNT","ODEYSYS_BSP_COMMISION","ODEYSYS_BSP_COMMISSION_PER","TOTAL_ODEYSYS_AGENCY_MARKUP"
+                        ,"TOTAL_ODEYSYS_AGENT_ONFLY_MARKUP","TOTAL_ODEYSYS_FARE","PAYMENT_MODE","PTIME","AGENCY_ID"
+                        ,"BRANCH_ID","BRANCH_ID","CDATE","SDATE","TCUST","UNAME","BSTATUS","OID","INVOICE_NUMBER"
+                        ,"DOB","REFUNDAMOUNT","REFUNDCANCELATIONAMOUNT","AGENCYNAME","TOTAL_ODEYSYS_BRANCH_ONFLY_MARKUP"
+                        ,"BOOKING_TYPE","IMPORT_PNR_CASE","ODEYSYS_BSP_COMMISSION_PER_CHILD","ODEYSYS_BSP_COMMISION_CHILD"
+                        ,"PAX_BASE_FARE","PAX_FEE_N_TAXES","PAX_ODEYSYS_MARKUP","PAX_ODEYSYS_SERVICE_CHARGE"
+                        ,"PAX_ODEYSYS_DISCOUNT","PAX_ODEYSYS_DISCOUNT","TCPAX","IATANUMBER","BRANCHNAME"
+                        ,"REFUNDSTATUS","AGENTORDERSTATUS","MANUAL_MARKUP","PCCIATANUMBER","STATE_NAME"
+                        ,"NDCSTAFFNAME","TOTAL_SURCHARGE_AMOUNT","CITY_NAME"
+
+                };
+        writer1.writeNext(header);
+
+        //   rvPnrimportHistoryRepo.findAll()
+
+        Flux<FinanceProjection> testing = services.findAlsl();
         testing.doOnNext(s->{}).doOnComplete(()->{
+            try {
+                writer1.close();
+                Date date2 = new  Date();
+                long diffInMillies = date2.getTime() - date1.getTime();
+                System.out.println("Close after  " + diffInMillies);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).subscribe(rvPnrimportHistory ->{
+//    System.out.println(maps.getTCPAX().getClass().getTypeName());
 
-        }).subscribe(maps ->{
-    System.out.println(maps);
-//            System.out.println(maps.get(0));
-//              Object o=maps.get(0);
+            header[0]=rvPnrimportHistory.getREF();
+            header[1]=rvPnrimportHistory.getCITY_NAME();
+            header[2]=rvPnrimportHistory.getCTITLE()+"";
 
-//             Object[] os=maps.toArray();
+            header[3]=rvPnrimportHistory.getCCITY()+"";
+            header[4]=rvPnrimportHistory.getCMOBILE()+"";
+            header[5]=rvPnrimportHistory.getCEMAIL();
+            header[6]=rvPnrimportHistory.getTICKET_NO();
+            header[7]=rvPnrimportHistory.getAIRLINE_PNR();
+            header[8]=rvPnrimportHistory.getSP_PNR();
+            header[9]=rvPnrimportHistory.getCCOUNTRY();
+            header[10]=rvPnrimportHistory.getAIRLINE_PNR();
+            header[11]=rvPnrimportHistory.getSP_PNR();
+            header[12]=rvPnrimportHistory.getTRIP_TYPE()+"";
+            header[13]=rvPnrimportHistory.getORIGIN();
+            header[14]=rvPnrimportHistory.getDESTINATION();
+            header[15]=rvPnrimportHistory.getNO_OF_SEGMENT()+"";
+            header[16]=rvPnrimportHistory.getBOOKING_CLASS()+"";
+            header[17]=rvPnrimportHistory.getCABIN_CLASS()+"";
+            header[18]=rvPnrimportHistory.getSUPPLIER_NAME()+"";
+            header[19]=rvPnrimportHistory.getPAX_FEE_N_TAXES()+"";
+            header[20]=rvPnrimportHistory.getTOTAL_ODEYSYS_MARKUP()+"";
+            header[21]=rvPnrimportHistory.getTOTAL_ODEYSYS_SERVICE_CHARGE()+"";
+           header[22]=rvPnrimportHistory.getTOTAL_ODEYSYS_DISCOUNT()+"";
+            header[23]=rvPnrimportHistory.getODEYSYS_BSP_COMMISION()+"";
+            header[24]=  rvPnrimportHistory.getODEYSYS_BSP_COMMISSION_PER()+"";
+            header[25]=  rvPnrimportHistory.getTOTAL_ODEYSYS_AGENCY_MARKUP()+"";
+            header[26]=  rvPnrimportHistory.getTOTAL_ODEYSYS_AGENT_ONFLY_MARKUP()+"";
+            header[27]=  rvPnrimportHistory.getTOTAL_ODEYSYS_FARE()+"";
+            header[28]=  rvPnrimportHistory.getPAYMENT_MODE()+"";
+           header[29]=  rvPnrimportHistory.getPTIME()+"";
+          header[30]=  rvPnrimportHistory.getAGENCY_ID()+"";
+            header[31]=  rvPnrimportHistory.getCDATE()+"";
+            header[32]=  rvPnrimportHistory.getBOOKING_TYPE()+"";
+            header[33]=  rvPnrimportHistory.getTOTAL_ODEYSYS_SERVICE_CHARGE()+"";
+            header[34]=  rvPnrimportHistory.getTOTAL_BASE_FARE()+"";
+            header[35]=  rvPnrimportHistory.getTCPAX()+"";
+            header[36]=  rvPnrimportHistory.getAGENTORDERSTATUS()+"";
+////            header[37]=  rvPnrimportHistory.p()+"";
+            writer1.writeNext(header);
 
+            file.setWritable(true);
 
         });
-        return testing;
+        return generatedString;
 
             }
 }
