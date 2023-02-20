@@ -1,5 +1,6 @@
 package com.example.test.demo.test.searchmodels;
 
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -7,40 +8,45 @@ import java.util.ArrayList;
 
 
 public class FinanceSerch {
-    private ArrayList<String> orgname;
-    private LocalDateTime Fdate;
-    private  LocalDateTime Tdate;
-
+    private String id;
+    private String Fdate;
+    private  String Tdate;
+private String branchId;
     public FinanceSerch() {
     }
 
-    public FinanceSerch(ArrayList<String> orgname, LocalDateTime fdate, LocalDateTime tdate) {
-        this.orgname = orgname;
-        Fdate = fdate;
-        Tdate = tdate;
+    public FinanceSerch(String id, String fdate, String tdate, String branchId) {
+        this.id = id;
+        this. Fdate = fdate;
+        this.Tdate = tdate;
+        this.branchId = branchId;
     }
 
-    public ArrayList<String> getOrgname() {
-        return orgname;
+    public String getId() {
+        return id;
     }
 
-    public void setOrgname(ArrayList<String> orgname) {
-        this.orgname = orgname;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public LocalDateTime getFdate() {
+    public String getFdate() {
         return Fdate;
     }
 
-    public void setFdate(LocalDateTime fdate) {
+    public void setFdate(String fdate) {
         Fdate = fdate;
     }
 
-    public LocalDateTime getTdate() {
+    public String getTdate() {
         return Tdate;
     }
 
-    public void setTdate(LocalDateTime tdate) {
+    public void setTdate(String tdate) {
         Tdate = tdate;
+    }
+
+    public String getBranchId() {
+        return branchId;
     }
 }
